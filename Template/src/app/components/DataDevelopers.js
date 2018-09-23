@@ -8,7 +8,7 @@ class DataDevelopers extends React.Component {
     }
 
     showTime = () => {
-        const time = new Date()
+        const time = new Date();
         alert(time);
     }
 
