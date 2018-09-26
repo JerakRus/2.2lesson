@@ -1,10 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import DataDevelopers from "./app/components/DataDevelopers"
+import App from "./app/components/App";
+import MainText from "./app/components/MainText";
+
 
 ReactDOM.render(
     <div>
-	    <DataDevelopers />
+	    <App />
+        <div><MainText /></div>
     </div>,
 	document.getElementById("app")
 );
