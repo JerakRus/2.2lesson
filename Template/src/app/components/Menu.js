@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import MenuItem from './MenuItem';
-import MainText from "./MainText";
+
 
 
 class Menu extends React.Component {

@@ -26,7 +26,7 @@ class Auth extends React.Component {
             password: event.target.value
         });
     }
-
+    
     saveToLocalStorage() {
         let data = {
             username: this.state.username,

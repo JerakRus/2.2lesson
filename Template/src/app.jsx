@@ -1,13 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from "./app/components/App";
-import MainText from "./app/components/MainText";
+
+import "./app/assets/styles.css"
+
 
 
 ReactDOM.render(
     <div>
 	    <App />
-        <div><MainText /></div>
     </div>,
 	document.getElementById("app")
 );

@@ -1,10 +1,25 @@
 import React from 'react';
 import Menu from "./Menu";
-import MainText from "./MainText";
 import Auth from "./Auth";
+import MainText from './MainText';
 
 
 class App extends React.Component {
+    constructor() {
+        super();
+        this.state = {
+            display: false
+        };
+
+        this.handleShowAuth = this.handleShowAuth.bind(this);
+    }
+
+    handleShowAuth() {
+        this.setState({
+            display: true
+        });
+    }
+
     render() {
         const menuItems = [
             { href: "/", title: "Main" },
@@ -13,11 +28,16 @@ class App extends React.Component {
             { href: "/contacts", title: "Contacts" },
         ];
 
+
         return (
             <div>
-                <Auth />
-                <ul><Menu titleMenu="Menu" items={ menuItems } /></ul>
+                <div className="btnAuth">
+                    <div type="submit" className="btn btn-primary" onClick={this.handleShowAuth}>AUTH</div>
+                    { this.state.display ? <Auth /> : null }
+                </div>
+                <ul><Menu titleMenu="Main page" items={ menuItems } /></ul>
                 <br />
+                <MainText />
             </div>
         );
     }
