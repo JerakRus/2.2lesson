@@ -32,7 +32,7 @@ class App extends React.Component {
         return (
             <div>
                 <div className="btnAuth">
-                    <div type="submit" className="btn btn-primary" onClick={this.handleShowAuth}>AUTH</div>
+                    <div className="btn btn-primary" onClick={this.handleShowAuth}>AUTH</div>
                     { this.state.display ? <Auth /> : null }
                 </div>
                 <ul><Menu titleMenu="Main page" items={ menuItems } /></ul>
