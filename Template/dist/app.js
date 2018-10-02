@@ -22007,7 +22007,7 @@
 	                    { className: "btnAuth" },
 	                    _react2.default.createElement(
 	                        "div",
-	                        { type: "submit", className: "btn btn-primary", onClick: this.handleShowAuth },
+	                        { className: "btn btn-primary", onClick: this.handleShowAuth },
 	                        "AUTH"
 	                    ),
 	                    this.state.display ? _react2.default.createElement(_Auth2.default, null) : null
@@ -22493,19 +22493,40 @@
 	    function MainText() {
 	        _classCallCheck(this, MainText);
 
-	        return _possibleConstructorReturn(this, (MainText.__proto__ || Object.getPrototypeOf(MainText)).apply(this, arguments));
+	        var _this = _possibleConstructorReturn(this, (MainText.__proto__ || Object.getPrototypeOf(MainText)).call(this));
+
+	        _this.state = {
+	            blogPosts: []
+	        };
+
+	        return _this;
 	    }
 
 	    _createClass(MainText, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            var _this2 = this;
+
+	            fetch("https://jsonplaceholder.typicode.com/posts").then(function (res) {
+	                return res.json();
+	            }).then(function (result) {
+	                _this2.setState({
+	                    blogPosts: result
+	                });
+	            });
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
+	            console.log(this.state.blogPosts);
+
 	            // Next step, get  data from api, send this variable to componentDidMount
-	            var dataForBlog = [{ title: "test", text: "test" }, { title: "test1", text: "test1" }, { title: "test3", text: "test3" }, { title: "test4", text: "test4" }, { title: "test5", text: "test5" }];
+	            var dataForBlog = this.state.blogPosts;
 
 	            var result = dataForBlog.map(function (items, index) {
 	                return _react2.default.createElement(
 	                    'div',
-	                    { key: index },
+	                    { id: items.id, userId: items.userId, key: index },
 	                    _react2.default.createElement(
 	                        'h1',
 	                        null,
@@ -22514,7 +22535,7 @@
 	                    _react2.default.createElement(
 	                        'p',
 	                        null,
-	                        items.text
+	                        items.body
 	                    )
 	                );
 	            });

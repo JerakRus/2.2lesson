@@ -5,22 +5,38 @@ import { Navbar } from 'react-bootstrap';
 // Nav, NavItem, NavDropdown, MenuItem
 
 class MainText extends React.Component {
+    constructor() {
+        super();
+        
+        this.state = {
+            blogPosts: []
+        };
+
+    }
+
+    componentDidMount() {
+        fetch("https://jsonplaceholder.typicode.com/posts") 
+        .then(res => res.json())
+        .then(
+            (result) => {
+                this.setState({
+                    blogPosts: result
+                })
+            }
+        )
+    }
 
     render() {
+        console.log(this.state.blogPosts);
+
         // Next step, get  data from api, send this variable to componentDidMount
-        const dataForBlog = [
-            { title: "test", text: "test" },
-            { title: "test1", text: "test1" },
-            { title: "test3", text: "test3" },
-            { title: "test4", text: "test4" },
-            { title: "test5", text: "test5" },
-        ];
+        const dataForBlog = this.state.blogPosts;
 
         let result = dataForBlog.map((items, index) => {
             return (
-                <div key={index}>
+                <div id={items.id} userId={items.userId} key={index}>
                     <h1>{items.title}</h1>
-                        <p>{items.text}</p>
+                        <p>{items.body}</p>
                 </div>
             ); 
         });
