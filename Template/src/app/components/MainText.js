@@ -1,8 +1,17 @@
 import React from 'react';
+import { createStore } from "redux";
+
+import changePostReducer from "../../reducers/reducer";
+
+// import addPosts from "../../actions/add";
+// import deletePostaction from "../../actions/delete";
+import changePost from "../../actions/change";
 
 import { Navbar } from 'react-bootstrap'; 
 
 // Nav, NavItem, NavDropdown, MenuItem
+
+let store = createStore(changePostReducer);
 
 class MainText extends React.Component {
     constructor() {
@@ -27,14 +36,23 @@ class MainText extends React.Component {
     }
 
     render() {
-        console.log(this.state.blogPosts);
+        console.log(store.getState);
+
+        store.dispatch(changePost("add Posts"));
+
+        store.subscribe(() => {
+            console.log('subscibe', store.getState());
+            return store.getState();
+        }) 
+
+
 
         // Next step, get  data from api, send this variable to componentDidMount
         const dataForBlog = this.state.blogPosts;
 
         let result = dataForBlog.map((items, index) => {
             return (
-                <div id={items.id} userId={items.userId} key={index}>
+                <div id={items.id} /* userId={items.userId} */ key={index}>
                     <h1>{items.title}</h1>
                         <p>{items.body}</p>
                 </div>
@@ -43,10 +61,10 @@ class MainText extends React.Component {
         
 
         return (
-                <div className="title">
-                    <Navbar>
+                <div>
+                    {/* <Navbar> */}
                         { result }
-                    </Navbar>
+                    {/* </Navbar> */}
                 </div>
         )
     };
