@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
-import { createStore } from 'redux';
 import { Provider } from "react-redux";
 
 import App from "./app/components/App";
@@ -12,14 +11,13 @@ import NotFound from "./app/components/NotFound";
 import Auth from "./app/components/Auth";
 import MainText from "./app/components/MainText";
 
-import changePostReducer from "./reducers/reducer";
+import store from "./app/components/store";
 
 import "./app/assets/styles.css"
 
 
 
 const app = document.getElementById('app');
-const store = createStore(changePostReducer);
 
 
 ReactDOM.render(
