@@ -1,17 +1,17 @@
 import React from 'react';
-import { createStore } from "redux";
-
-import changePostReducer from "../../reducers/reducer";
-
-// import addPosts from "../../actions/add";
-// import deletePostaction from "../../actions/delete";
-import changePost from "../../actions/change";
+import { connect } from "react-redux";
 
 import { Navbar } from 'react-bootstrap'; 
+import addPost from '../../actions/add';
+import deletePost from '../../actions/delete';
+import changePost from '../../actions/change';
+
+
+import store from "./store";
 
 // Nav, NavItem, NavDropdown, MenuItem
 
-let store = createStore(changePostReducer);
+// let store = createStore(changePostReducer);
 
 class MainText extends React.Component {
     constructor() {
@@ -24,31 +24,31 @@ class MainText extends React.Component {
     }
 
     componentDidMount() {
+
         fetch("https://jsonplaceholder.typicode.com/posts") 
         .then(res => res.json())
         .then(
             (result) => {
                 this.setState({
-                    blogPosts: result
+                    blogPosts: result,
                 })
             }
         )
     }
 
     render() {
-        console.log(store.getState);
-
-        store.dispatch(changePost("add Posts"));
-
-        store.subscribe(() => {
-            console.log('subscibe', store.getState());
-            return store.getState();
-        }) 
-
-
-
-        // Next step, get  data from api, send this variable to componentDidMount
+        // console.log(store);
         const dataForBlog = this.state.blogPosts;
+        // console.log("props", this.props);
+
+
+
+        store.dispatch(addPost(dataForBlog));
+        store.dispatch(deletePost("delete"));
+        store.dispatch(changePost("change"));
+
+        console.log(this.props);
+
 
         let result = dataForBlog.map((items, index) => {
             return (
@@ -70,4 +70,12 @@ class MainText extends React.Component {
     };
 }
 
-export default MainText;
+function mapStateToProps(store) {
+    // Не получается получить данные
+    return {
+        posts: store.addPost
+    };
+}
+
+
+export default connect(mapStateToProps)(MainText);
